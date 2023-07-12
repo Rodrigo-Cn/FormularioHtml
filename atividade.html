@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+</head>
+<body>
+    <style>
+        #div-form
+        {
+            position: relative;
+            border: 7px rgb(142, 194, 121) solid;
+            left: 350px;
+            padding: 10px;
+            width: 500px;
+            height: 600px;
+            line-height: 25px;
+        }
+        #inf-email
+        {
+            color: red;
+        }
+        #inf-telefone
+        {
+            color: red;           
+        }
+        #inf-senha
+        {
+            color: red;   
+        }
+    </style>
+
+    <div id="div-form">
+        <h1>Formulário de inscrição</h1>
+        <h3>Preencha os dados</h3>
+            <form method="get" id="form1">
+                <p>Nome:<input type="text" style="width: 200px;" id="nome1"></p>
+                <p>E-mail:<input type="email" style="width: 200px;" id="inp-email"></p>
+                <p>Repita o e-mail:<input type="email" style="width: 200px;" id="inp-email2"></p>
+                <span id="inf-email"></span>       
+                <p>Endereço:<input type="text" style="width: 300px;" id="end1"></p>
+                <p>Cidade:<input type="text" style="width: 317px;" id="cidade"></p>
+                <p>Telefone:<input type="text" style="width: 30px;" id="ddd"> <input type="text" style="width: 120px;" id="telefone"></p>
+                <span id="inf-telefone"></span>
+                <p>Usuário:<input type="text" style="width: 168px;" placeholder="Entre com o seu login" id="inp-usuario"></p>
+                <p>Senha:<input type="password" style="width: 180px;" id="inp-password"></p>
+                <p>Repita a senha:<input type="password" style="width: 180px;" id="inp-password2"></p>
+                <span id="inf-senha"></span>
+                <p><input type="submit" value="Finalizar minha inscrição" id="sub" onclick="validarFormulario(event)"></p>
+            </form>
+
+            <script>
+                function validarFormulario(event) {
+                    event.preventDefault();
+
+                    var nome = document.getElementById("nome1").value;
+                    var email = document.getElementById("inp-email").value;
+                    var emailRepetido = document.getElementById("inp-email2").value;
+                    var endereco = document.getElementById("end1").value;
+                    var cidade = document.getElementById("cidade").value;
+                    var telefone = document.getElementById("telefone").value;
+                    var usuario = document.getElementById("inp-usuario").value;
+                    var senha = document.getElementById("inp-password").value;
+                    var senhaRepetida = document.getElementById("inp-password2").value;
+                    var infoEmail = document.getElementById("inf-email");
+                    var infoTelefone = document.getElementById("inf-telefone");
+                    var infoSenha = document.getElementById("inf-senha");
+                    var ddd1 = document.getElementById("ddd").value;
+
+                    infoEmail.textContent = "";
+                    infoTelefone.textContent = "";
+                    infoSenha.textContent = "";
+
+                    
+                    if (nome === "" || email === "" || emailRepetido === "" || endereco === "" || cidade === "" || telefone === "" || usuario === "" || senha === "" || senhaRepetida === "") {
+                        infoSenha.textContent = "Por favor, preencha todos os campos do formulário.";
+                    }
+                    else if (email !== emailRepetido) {
+                        infoEmail.textContent = "Os campos de e-mail não coincidem.";
+                    }
+                    else if (senha !== senhaRepetida) {
+                        infoSenha.textContent = "Os campos de senha não coincidem.";
+                    }
+                    else {
+                    
+                    var ddd1 = document.getElementById("ddd").value;
+
+                    try {
+                        if (isNaN(parseInt(telefone))) {
+                            throw "O número de telefone é inválido.(Use apenas números!)";
+                        }
+                        if (telefone.length > 10) {
+                            throw "O número de telefone deve ter menos de 10 números.";
+                        }
+                        if (telefone.length < 7) {
+                            throw "O número de telefone deve ter mais de 7 números.";
+                        }
+                    } catch (error) {
+                        infoTelefone.textContent = error;
+                        return;
+                    }
+
+                    try {
+                        if (isNaN(parseInt(ddd1))) {
+                            throw "O (DDD) do telefone é inválido.(Use apenas números!)";
+                        }
+                        if (ddd1.length != 2) {
+                            throw "O (DDD) do telefone deve ter 2 números.";
+                        }
+                    } catch (error1) {
+                        infoTelefone.textContent = error1;
+                        return;
+                    }
+                        alert("Cadastro realizado com sucesso!!!");
+                        document.getElementById("form1").reset();
+                    }
+                }
+            </script>
+    </div>
+</body>
+</html>
+
